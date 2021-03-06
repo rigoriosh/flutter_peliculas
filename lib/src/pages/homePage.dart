@@ -9,77 +9,62 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final _screenSize = MediaQuery.of(context).size;
-    //print(_screenSize);
     peliculasProvider.getPopulares();
     return Scaffold(
-      appBar: AppBar(
-        centerTitle: false,
-        title: Text('Películas en cines'),
-        //backgroundColor: Colors.indigoAccent,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon( Icons.search ),
-            onPressed: () {
-              showSearch(
-                context: context,
-                delegate: DataSearch(),
-                //query: 'hi'
+        appBar: AppBar(
+          centerTitle: false,
+          title: Text(
+            'Películas en cines por Rigo Rios',
+            style: TextStyle(fontSize: 15.0),
+          ),
+          backgroundColor: Colors.indigoAccent,
+          actions: <Widget>[
+            IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                showSearch(
+                  context: context,
+                  delegate: DataSearch(),
+                  //query: 'hi'
                 );
-            },
-          )
-        ],
-      ),
-      body: Container(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: <Widget>[
-            _swiperTarjetas(),
-            _footer(context)
+              },
+            )
           ],
         ),
-      )
-       
-    );
+        body: Container(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              _swiperTarjetas(),
+              _footer(context),
+            ],
+          ),
+        ));
   }
 
-  Widget _swiperTarjetas(/* BuildContext context */) {
+  Widget _swiperTarjetas() {
     return FutureBuilder(
       future: peliculasProvider.getEnCines(),
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
-        
-        if ( snapshot.hasData ) {
-          return CardSwiper( peliculas: snapshot.data );
+        if (snapshot.hasData) {
+          return CardSwiper(peliculas: snapshot.data);
         } else {
           return Container(
-            height: 300.0,
-            child: Center(
-              child: CircularProgressIndicator()
-            )
-          );
+              height: 300.0, child: Center(child: CircularProgressIndicator()));
         }
-        
       },
     );
-
-    /* peliculasProvider.getEnCines();
-    
-    return CardSwiper(peliculas: [1,2,3,4,5],); */
   }
 
   Widget _footer(BuildContext context) {
     final _screenSize = MediaQuery.of(context).size;
     return Container(
-      //color: Colors.blue,
-      height: _screenSize.height*0.35,
-      //width: double.infinity,
-      child: //Text("data")
-      Column(
+      height: _screenSize.height * 0.35,
+      child: Column(
         mainAxisSize: MainAxisSize.min,
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-            //color: Colors.yellow,
             padding: EdgeInsets.only(left: 20.0),
             child: Text(
               'Populares',
@@ -89,14 +74,12 @@ class HomePage extends StatelessWidget {
           SizedBox(height: 10.0),
           StreamBuilder(
               stream: peliculasProvider.popularesStream,
-              //initialData: [],
-              builder: (BuildContext context,
-                  AsyncSnapshot<List> snapshot) {
+              builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
                 if (snapshot.hasData) {
                   return VistaHorixontalPeliculas(
                     peliculas: snapshot.data,
                     siguientePagina: peliculasProvider.getPopulares,
-                    );
+                  );
                 } else {
                   return Container(
                       height: 700.0,

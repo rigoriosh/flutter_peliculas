@@ -26,7 +26,7 @@ class VistaHorixontalPeliculas extends StatelessWidget {
 
     return Container(
         //color: Colors.blueGrey,
-        height: _tamanioPantalla.height * 0.3,
+        height: _tamanioPantalla.height * 0.25,
         child: PageView.builder(
           //children: _tarjetas(context),
           pageSnapping: false,
@@ -74,8 +74,7 @@ class VistaHorixontalPeliculas extends StatelessWidget {
           Navigator.pushNamed(context, 'detalle',
               arguments:
                   pelicula); //sedirege a la ruta 'detalle' y llava argumentos.
-        }
-        );
+        });
   }
 
   /* List<Widget> _tarjetas(BuildContext context) {

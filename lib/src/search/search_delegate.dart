@@ -19,7 +19,7 @@ class DataSearch extends SearchDelegate {
 
   @override
   List<Widget> buildActions(BuildContext context) {
-    // TODO: implement buildActions, // aciones del appbar
+    // aciones del appbar
     return [
       IconButton(
           icon: Icon(Icons.clear),
@@ -31,7 +31,7 @@ class DataSearch extends SearchDelegate {
 
   @override
   Widget buildLeading(BuildContext context) {
-    // TODO: implement buildLeading// icono a la izquierda del appbar
+    // icono a la izquierda del appbar
     return IconButton(
         icon: AnimatedIcon(
             icon: AnimatedIcons.menu_arrow, progress: transitionAnimation),
@@ -42,13 +42,13 @@ class DataSearch extends SearchDelegate {
 
   @override
   Widget buildResults(BuildContext context) {
-    // TODO: implement buildResults // crea los resultados a mostrar
+    // crea los resultados a mostrar
     return Text("data");
   }
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    // TODO: implement buildSuggestions // con las sugerencias cuando la persona escribe
+    // con las sugerencias cuando la persona escribe
 
     if (query.isEmpty) {
       Container();
@@ -70,9 +70,10 @@ class DataSearch extends SearchDelegate {
                     fit: BoxFit.contain,
                   ),
                   title: Text(pelicula.title),
-                  onTap: (){
+                  onTap: () {
                     close(context, null);
-                    Navigator.pushNamed(context, 'detalle', arguments: pelicula);
+                    Navigator.pushNamed(context, 'detalle',
+                        arguments: pelicula);
                   },
                 );
               }).toList(),
@@ -83,25 +84,5 @@ class DataSearch extends SearchDelegate {
             );
           }
         });
-    /*
-    final listaSugerida = (query.isEmpty)
-                          ?peliculasRecientes
-                          :peliculas.where(
-                            (p)=>p.toLowerCase().startsWith(query.toLowerCase())
-                            ).toList();
-    return ListView.builder(
-      itemCount: listaSugerida.length,
-      itemBuilder: (contex, i){
-        return ListTile(
-          leading: Icon(Icons.movie),
-          title: Text(listaSugerida[i]),
-          onTap: (){
-            seleccion = listaSugerida[i];
-            showResults(context);
-            },
-        );
-      },
-      );
-       */
   }
 }
